@@ -57,6 +57,7 @@
 			isa = PBXGroup;
 			children = (
 				A1A32FEC2AB899A900F88724 /* VisionProExampleApp.swift */,
+				A1A32FFB2AB89B3900F88724 /* Sources */,
 				A1A32FEE2AB899A900F88724 /* ContentView.swift */,
 				A1A32FF02AB899AB00F88724 /* Assets.xcassets */,
 				A1A32FF52AB899AB00F88724 /* Info.plist */,
@@ -79,6 +80,77 @@
 				A1A32FF32AB899AB00F88724 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		A1A32FFB2AB89B3900F88724 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				A1A32FFD2AB89B4700F88724 /* Domain */,
+				A1A32FFC2AB89B4100F88724 /* App */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		A1A32FFC2AB89B4100F88724 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				A1A330002AB89B6A00F88724 /* Module */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		A1A32FFD2AB89B4700F88724 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				A1A32FFF2AB89B5700F88724 /* Model */,
+				A1A32FFE2AB89B5200F88724 /* UseCase */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		A1A32FFE2AB89B5200F88724 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		A1A32FFF2AB89B5700F88724 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		A1A330002AB89B6A00F88724 /* Module */ = {
+			isa = PBXGroup;
+			children = (
+				A1A330012AB89B7000F88724 /* Dashboard */,
+				A1A330022AB89B7900F88724 /* History */,
+				A1A330032AB89B8500F88724 /* QR */,
+			);
+			path = Module;
+			sourceTree = "<group>";
+		};
+		A1A330012AB89B7000F88724 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		A1A330022AB89B7900F88724 /* History */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
+		A1A330032AB89B8500F88724 /* QR */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = QR;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
