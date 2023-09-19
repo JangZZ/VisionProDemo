@@ -100,7 +100,7 @@ struct MainView: View {
     @ViewBuilder var detailContent: some View {
         switch itemSelected {
         case .home: HomeView(columnVisibility: $columnVisibility)
-        default: Text("OKOK")
+        default: QRView()
         }
     }
 }
