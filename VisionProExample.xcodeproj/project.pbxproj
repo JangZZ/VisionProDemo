@@ -7,21 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A1A32FEB2AB899A900F88724 /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = A1A32FEA2AB899A900F88724 /* RealityKitContent */; };
 		A1A32FED2AB899A900F88724 /* VisionProExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A32FEC2AB899A900F88724 /* VisionProExampleApp.swift */; };
-		A1A32FEF2AB899A900F88724 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A32FEE2AB899A900F88724 /* ContentView.swift */; };
+		A1A32FEF2AB899A900F88724 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A32FEE2AB899A900F88724 /* HomeView.swift */; };
 		A1A32FF12AB899AB00F88724 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1A32FF02AB899AB00F88724 /* Assets.xcassets */; };
 		A1A32FF42AB899AB00F88724 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1A32FF32AB899AB00F88724 /* Preview Assets.xcassets */; };
+		A1A330052AB8AA6400F88724 /* QRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A330042AB8AA6400F88724 /* QRView.swift */; };
+		A1A330072AB9933600F88724 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A330062AB9933600F88724 /* HomeViewModel.swift */; };
+		A1A3300A2AB99C9400F88724 /* Double+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A330092AB99C9400F88724 /* Double+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A1A32FE52AB899A900F88724 /* VisionProExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VisionProExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		A1A32FE92AB899A900F88724 /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
 		A1A32FEC2AB899A900F88724 /* VisionProExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionProExampleApp.swift; sourceTree = "<group>"; };
-		A1A32FEE2AB899A900F88724 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		A1A32FEE2AB899A900F88724 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		A1A32FF02AB899AB00F88724 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1A32FF32AB899AB00F88724 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		A1A32FF52AB899AB00F88724 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1A330042AB8AA6400F88724 /* QRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRView.swift; sourceTree = "<group>"; };
+		A1A330062AB9933600F88724 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		A1A330092AB99C9400F88724 /* Double+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,7 +33,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1A32FEB2AB899A900F88724 /* RealityKitContent in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,7 +43,6 @@
 			isa = PBXGroup;
 			children = (
 				A1A32FE72AB899A900F88724 /* VisionProExample */,
-				A1A32FE82AB899A900F88724 /* Packages */,
 				A1A32FE62AB899A900F88724 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -58,20 +60,11 @@
 			children = (
 				A1A32FEC2AB899A900F88724 /* VisionProExampleApp.swift */,
 				A1A32FFB2AB89B3900F88724 /* Sources */,
-				A1A32FEE2AB899A900F88724 /* ContentView.swift */,
 				A1A32FF02AB899AB00F88724 /* Assets.xcassets */,
 				A1A32FF52AB899AB00F88724 /* Info.plist */,
 				A1A32FF22AB899AB00F88724 /* Preview Content */,
 			);
 			path = VisionProExample;
-			sourceTree = "<group>";
-		};
-		A1A32FE82AB899A900F88724 /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				A1A32FE92AB899A900F88724 /* RealityKitContent */,
-			);
-			path = Packages;
 			sourceTree = "<group>";
 		};
 		A1A32FF22AB899AB00F88724 /* Preview Content */ = {
@@ -94,6 +87,7 @@
 		A1A32FFC2AB89B4100F88724 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				A1A330082AB99C8900F88724 /* Helpers */,
 				A1A330002AB89B6A00F88724 /* Module */,
 			);
 			path = App;
@@ -135,6 +129,8 @@
 		A1A330012AB89B7000F88724 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				A1A32FEE2AB899A900F88724 /* HomeView.swift */,
+				A1A330062AB9933600F88724 /* HomeViewModel.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -149,8 +145,17 @@
 		A1A330032AB89B8500F88724 /* QR */ = {
 			isa = PBXGroup;
 			children = (
+				A1A330042AB8AA6400F88724 /* QRView.swift */,
 			);
 			path = QR;
+			sourceTree = "<group>";
+		};
+		A1A330082AB99C8900F88724 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				A1A330092AB99C9400F88724 /* Double+Ext.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -170,7 +175,6 @@
 			);
 			name = VisionProExample;
 			packageProductDependencies = (
-				A1A32FEA2AB899A900F88724 /* RealityKitContent */,
 			);
 			productName = VisionProExample;
 			productReference = A1A32FE52AB899A900F88724 /* VisionProExample.app */;
@@ -226,8 +230,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A1A32FEF2AB899A900F88724 /* ContentView.swift in Sources */,
+				A1A32FEF2AB899A900F88724 /* HomeView.swift in Sources */,
+				A1A330052AB8AA6400F88724 /* QRView.swift in Sources */,
 				A1A32FED2AB899A900F88724 /* VisionProExampleApp.swift in Sources */,
+				A1A330072AB9933600F88724 /* HomeViewModel.swift in Sources */,
+				A1A3300A2AB99C9400F88724 /* Double+Ext.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,13 +432,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		A1A32FEA2AB899A900F88724 /* RealityKitContent */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = RealityKitContent;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = A1A32FDD2AB899A900F88724 /* Project object */;
 }

@@ -10,8 +10,13 @@ import SwiftUI
 @main
 struct VisionProExampleApp: App {
     var body: some Scene {
-        WindowGroup {
-            ContentView()
+        WindowGroup(id: "Dashboard") {
+            MainView()
+        }
+        .windowResizability(.contentSize)
+        
+        WindowGroup(id: "QRWindow") {
+            QRView()
         }
     }
 }
