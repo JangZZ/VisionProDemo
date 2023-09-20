@@ -44,42 +44,36 @@ struct Account {
 struct MainView: View {
     
     @State private var itemSelected: SideMenuItem = .home
-    @State private var columnVisibility: NavigationSplitViewVisibility = .doubleColumn
+    @State private var columnVisibility: NavigationSplitViewVisibility = .detailOnly
     
     var body: some View {
         NavigationSplitView(columnVisibility: $columnVisibility) {
             VStack(alignment: .leading) {
     
                 VStack(alignment: .leading) {
-                    HStack {
-                        Spacer()
-                        
-                        Button { 
-                            columnVisibility = .detailOnly
-                        } label: {
-                            Image(systemName: "xmark.circle.fill")
-                                .resizable()
-                                .frame(width: 30, height: 30)
-                        }
-                        .buttonStyle(.plain)
-                        .padding(.trailing, 15)
+                    Button {
+                        columnVisibility = .detailOnly
+                    } label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .resizable()
+                            .frame(width: 30, height: 30)
                     }
-                    .frame(height: 30)
+                    .buttonStyle(.plain)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .padding(.trailing, 15)
                     
                     Image(.icLogoTech)
                         .resizable()
-                        .frame(width: 100, height: 20)
+                        .frame(width: 150, height: 20)
                     
-                    HStack {
-                        Text("Hello,\nTRUONG HOANG NAM")
-                            .font(.system(size: 20, weight: .bold))
-                            .multilineTextAlignment(.leading)
-                        
-                        Spacer()
-                    }
+                    Text("Hello,\nTRUONG HOANG NAM")
+                        .font(.system(size: 20, weight: .bold))
+                        .multilineTextAlignment(.leading)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 .padding(.leading, 20)
                 .padding(.bottom, 20)
+                .padding(.top, 30)
                 .background(.thinMaterial)
                 
                 List(SideMenuItem.allCases, id: \.self) { item in
@@ -87,10 +81,9 @@ struct MainView: View {
                         itemSelected = item
                     }
                 }
-                
-                Spacer()
             }
             .frame(maxWidth: .infinity)
+            .navigationBarHidden(true)
         } detail: {
             detailContent
         }
@@ -118,35 +111,29 @@ struct HomeView: View {
         NavigationStack(path: $path) {
             VStack(alignment: .trailing) {
                 if columnVisibility == .detailOnly {
-                    HStack {
-                        Button {
-                            columnVisibility = .doubleColumn
-                        } label: {
-                            Image(systemName: "circle.grid.3x3.circle.fill")
-                                .resizable()
-                                .frame(width: 40, height: 40)
-                        }
-                        .buttonStyle(.plain)
-                        
-                        Spacer()
+                    Button {
+                        columnVisibility = .doubleColumn
+                    } label: {
+                        Image(systemName: "circle.grid.3x3.circle.fill")
+                            .resizable()
+                            .frame(width: 40, height: 40)
                     }
-                    .frame(height: 50)
-                    .padding(.horizontal, 45)
+                    .buttonStyle(.plain)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 30)
+                    
                 } else {
-                    EmptyView()
-                        .frame(height: 50)
+                    Spacer()
+                        .frame(height: 40)
                 }
                 
-                HStack {
-                    Image(.icLogoTech)
-                        .resizable()
-                        .frame(width: 360, height: 48)
-                        .padding(.horizontal, 45)
-                        .padding(.top, 30)
-                        .padding(.bottom, 16)
-                    
-                    Spacer()
-                }
+                Image(.icLogoTech)
+                    .resizable()
+                    .frame(width: 360, height: 48)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 30)
+                    .padding(.top, 30)
+                    .padding(.bottom, 20)
                 
                 
                 HStack {
@@ -156,7 +143,7 @@ struct HomeView: View {
                     
                     currentBalance
                 }
-                .padding(.leading, 45)
+                .padding(.leading, 30)
                 
                 HStack(spacing: 30) {
                     historyView
@@ -169,6 +156,8 @@ struct HomeView: View {
             }
             .frame(maxWidth: .infinity)
             .padding(.bottom, 30)
+            .padding(.top, 30)
+            .navigationBarHidden(true)
         }
         .onAppear {
             vm.fetchHistory()
@@ -179,21 +168,20 @@ struct HomeView: View {
         HStack(spacing: 16) {
             Image(.icLogo)
             
-            VStack(alignment: .leading, spacing: 10) {
+            VStack(alignment: .leading, spacing: 5) {
                 Text("Current Balance")
                     .font(.system(size: 30, weight: .light))
                     .multilineTextAlignment(.leading)
                     .foregroundColor(.black)
                 
-                Text("3,611,999")
+                Text("30,000,611,999")
                     .font(.system(size: 28, weight: .medium))
                     .multilineTextAlignment(.leading)
                     .foregroundColor(.black)
             }
         }
-        .padding(.leading, 34)
         .padding(.vertical, 16)
-        .padding(.trailing, 20)
+        .padding(.horizontal, 35)
         .background(.ultraThinMaterial)
         .clipShape(
             .rect(
@@ -210,27 +198,39 @@ struct HomeView: View {
     @ViewBuilder var actionsButton: some View {
         HStack(spacing: 20) {
             buildMainButton(
+                action: {
+                    
+                },
                 title: "Accounts & Cards",
                 image: Image(.icAccountCard)
             )
             
             buildMainButton(
+                action: {
+                    
+                },
                 title: "Move Money",
                 image: Image(.icMoveMoney)
             )
             
             buildMainButton(
+                action: {
+                    openWindow(id: "QRWindow")
+                },
                 title: "Scan QR",
                 image: Image(.icQr)
             )
 
             buildMainButton(
+                action: {
+                    
+                },
                 title: "Cardless withdraw",
                 image: Image(.icCardless)
             )
         }
-        .padding(.vertical, 30)
-        .padding(.horizontal, 40)
+        .padding(.vertical, 16)
+        .padding(.horizontal, 20)
         .overlay {
             RoundedRectangle(cornerRadius: 18)
                 .stroke(.white, lineWidth: 2)
@@ -238,11 +238,12 @@ struct HomeView: View {
     }
     
     @ViewBuilder func buildMainButton(
+        action: @escaping () -> Void,
         title: String,
         image: Image
     ) -> some View {
         Button {
-            
+            action()
         } label: {
             VStack {
                 image
@@ -283,7 +284,7 @@ struct HomeView: View {
             Text("Recent activities")
                 .font(.largeTitle)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.leading, 25)
+                .padding(.leading, 40)
             
             List(vm.history, id: \.transactionID) { history in
                 buildHistoryView(history)
@@ -296,7 +297,7 @@ struct HomeView: View {
             Text("Money Tracker")
                 .font(.largeTitle)
                 .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.leading, 25)
+                .padding(.leading, 10)
             
             chartView
         }
@@ -312,6 +313,7 @@ struct HomeView: View {
                 .foregroundStyle(by: .value("Name", chart.name))
             }
         }
+        .padding(.trailing, 30)
     }
 }
 
