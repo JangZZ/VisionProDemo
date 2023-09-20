@@ -43,8 +43,8 @@ struct QRView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(width: 300, height: 400)
+                        infoView
                     }
-                    infoView
                 })
                 .padding(.all, 24)
             }
