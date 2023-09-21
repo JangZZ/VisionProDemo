@@ -14,6 +14,8 @@
 		A1A330052AB8AA6400F88724 /* QRView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A330042AB8AA6400F88724 /* QRView.swift */; };
 		A1A330072AB9933600F88724 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A330062AB9933600F88724 /* HomeViewModel.swift */; };
 		A1A3300A2AB99C9400F88724 /* Double+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A330092AB99C9400F88724 /* Double+Ext.swift */; };
+		A1A3300C2ABA9E8500F88724 /* HistoryDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A3300B2ABA9E8500F88724 /* HistoryDetail.swift */; };
+		A1A3300E2ABAA15000F88724 /* HomeNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A3300D2ABAA15000F88724 /* HomeNavigator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		A1A330042AB8AA6400F88724 /* QRView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRView.swift; sourceTree = "<group>"; };
 		A1A330062AB9933600F88724 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		A1A330092AB99C9400F88724 /* Double+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
+		A1A3300B2ABA9E8500F88724 /* HistoryDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetail.swift; sourceTree = "<group>"; };
+		A1A3300D2ABAA15000F88724 /* HomeNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +135,7 @@
 			children = (
 				A1A32FEE2AB899A900F88724 /* HomeView.swift */,
 				A1A330062AB9933600F88724 /* HomeViewModel.swift */,
+				A1A3300D2ABAA15000F88724 /* HomeNavigator.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -138,6 +143,7 @@
 		A1A330022AB89B7900F88724 /* History */ = {
 			isa = PBXGroup;
 			children = (
+				A1A3300B2ABA9E8500F88724 /* HistoryDetail.swift */,
 			);
 			path = History;
 			sourceTree = "<group>";
@@ -234,7 +240,9 @@
 				A1A330052AB8AA6400F88724 /* QRView.swift in Sources */,
 				A1A32FED2AB899A900F88724 /* VisionProExampleApp.swift in Sources */,
 				A1A330072AB9933600F88724 /* HomeViewModel.swift in Sources */,
+				A1A3300E2ABAA15000F88724 /* HomeNavigator.swift in Sources */,
 				A1A3300A2AB99C9400F88724 /* Double+Ext.swift in Sources */,
+				A1A3300C2ABA9E8500F88724 /* HistoryDetail.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

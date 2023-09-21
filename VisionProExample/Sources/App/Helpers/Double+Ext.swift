@@ -9,8 +9,6 @@ import Foundation
 
 extension Double {
     func convertToMoneyString() -> String {
-        guard self > 0 else { return "0.0 M" }
-
         return formatLargeMoney(numberOfFraction: 1)
     }
     

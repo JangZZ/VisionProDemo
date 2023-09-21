@@ -24,7 +24,7 @@ struct ChartData {
     let name: String
 }
 
-struct TransactionHistory {
+struct TransactionHistory: Hashable {
     let transactionID: String
     let createdTime: String
     let balance: Double
@@ -34,7 +34,7 @@ struct TransactionHistory {
     let toAccount: Account
 }
 
-struct Account {
+struct Account: Hashable {
     let customerName: String
     let balance: Double
     let accountNumber: String
@@ -43,8 +43,10 @@ struct Account {
 
 struct MainView: View {
     
+    // MARK: - Properties
     @State private var itemSelected: SideMenuItem = .home
     @State private var columnVisibility: NavigationSplitViewVisibility = .detailOnly
+    @StateObject private var homeNavigator = HomeNavigator()
     
     var body: some View {
         NavigationSplitView(columnVisibility: $columnVisibility) {
@@ -93,6 +95,7 @@ struct MainView: View {
     @ViewBuilder var detailContent: some View {
         switch itemSelected {
         case .home: HomeView(columnVisibility: $columnVisibility)
+                .environmentObject(homeNavigator)
         default: QRView()
         }
     }
@@ -102,13 +105,12 @@ struct HomeView: View {
     
     // MARK: - Properties
     @Environment(\.openWindow) var openWindow
-    @State var path: [Router] =  []
+    @EnvironmentObject var navigator: HomeNavigator
     @Binding var columnVisibility: NavigationSplitViewVisibility
-    
     var vm = HomeViewModel()
     
     var body: some View {
-        NavigationStack(path: $path) {
+        NavigationStack(path: $navigator.path) {
             VStack(alignment: .trailing) {
                 if columnVisibility == .detailOnly {
                     Button {
@@ -121,7 +123,7 @@ struct HomeView: View {
                     .buttonStyle(.plain)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, 30)
-                    
+                    .hoverEffect()
                 } else {
                     Spacer()
                         .frame(height: 40)
@@ -135,32 +137,31 @@ struct HomeView: View {
                     .padding(.top, 30)
                     .padding(.bottom, 20)
                 
-                
-                HStack {
-                    actionsButton
-                    
-                    Spacer()
-                    
-                    currentBalance
-                }
-                .padding(.leading, 30)
+                currentBalance
                 
                 HStack(spacing: 30) {
                     historyView
                     
                     chartMoneyTracker
                 }
-                .padding(.top, 30)
+                .padding(.top, 16)
                 
                 Spacer()
             }
             .frame(maxWidth: .infinity)
-            .padding(.bottom, 30)
+            .padding(.bottom, 16)
             .padding(.top, 30)
             .navigationBarHidden(true)
+            .navigate(by: navigator)
         }
         .onAppear {
             vm.fetchHistory()
+        }
+        .ornament(
+            attachmentAnchor: .scene(.bottom),
+            contentAlignment: .center
+        ) {
+            actionsButton
         }
     }
     
@@ -170,19 +171,19 @@ struct HomeView: View {
             
             VStack(alignment: .leading, spacing: 5) {
                 Text("Current Balance")
-                    .font(.system(size: 30, weight: .light))
+                    .font(.subheadline)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(.black)
                 
                 Text("30,000,611,999")
-                    .font(.system(size: 28, weight: .medium))
+                    .font(.callout)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(.black)
             }
         }
         .padding(.vertical, 16)
-        .padding(.horizontal, 35)
-        .background(.ultraThinMaterial)
+        .padding(.horizontal, 20)
+        .background(.fill.tertiary)
         .clipShape(
             .rect(
                 topLeadingRadius: 10,
@@ -192,7 +193,6 @@ struct HomeView: View {
                 style: .continuous
             )
         )
-
     }
     
     @ViewBuilder var actionsButton: some View {
@@ -231,10 +231,7 @@ struct HomeView: View {
         }
         .padding(.vertical, 16)
         .padding(.horizontal, 20)
-        .overlay {
-            RoundedRectangle(cornerRadius: 18)
-                .stroke(.white, lineWidth: 2)
-        }
+        .glassBackgroundEffect(in: .rect(cornerRadius: 12))
     }
     
     @ViewBuilder func buildMainButton(
@@ -248,17 +245,18 @@ struct HomeView: View {
             VStack {
                 image
                 Text(title)
+                    .font(.system(size: 12))
             }
-            .frame(width: 100, height: 100)
-            .background(.ultraThinMaterial)
-            .cornerRadius(10)
+            .frame(width: 120, height: 44)
+            .padding(16)
         }
-        .buttonStyle(.plain)
+        .buttonStyle(FunFactButtonStyle())
     }
     
     @ViewBuilder func buildHistoryView(_ history: TransactionHistory) -> some View {
         HStack(spacing: 20) {
-            Image(history.balance > 0 ? "Money in" : "Money out")
+            Image(systemName: history.balance > 0 ? "arrow.down.left.square.fill" : "arrow.up.forward.app.fill")
+                .foregroundColor(history.balance > 0 ? .green : .black)
             
             VStack(alignment: .leading, spacing: 10) {
                 Text(history.toAccount.customerName)
@@ -277,12 +275,16 @@ struct HomeView: View {
                 .multilineTextAlignment(.trailing)
         }
         .frame(maxWidth: .infinity)
+        .contentShape(Rectangle())
+        .onTapGesture {
+            navigator.present(sheet: .historyDetail(history))
+        }
     }
     
     @ViewBuilder var historyView: some View {
         VStack {
             Text("Recent activities")
-                .font(.largeTitle)
+                .font(.title)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, 40)
             
@@ -290,12 +292,13 @@ struct HomeView: View {
                 buildHistoryView(history)
             }
         }
+        .padding(.leading, 10)
     }
     
     @ViewBuilder var chartMoneyTracker: some View {
         VStack {
             Text("Money Tracker")
-                .font(.largeTitle)
+                .font(.title)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, 10)
             
@@ -311,19 +314,21 @@ struct HomeView: View {
                     y: .value("Count", chart.count)
                 )
                 .foregroundStyle(by: .value("Name", chart.name))
+                .cornerRadius(10, style: .continuous)
             }
         }
         .padding(.trailing, 30)
     }
 }
 
-enum Router {
-    case main
-    case qrTransfer
-    case accountAndCard
-    case cardless
-}
-
 #Preview(windowStyle: .plain) {
     HomeView(columnVisibility: .constant(.doubleColumn))
+}
+
+struct FunFactButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .background(.regularMaterial, in: .rect(cornerRadius: 12))
+            .hoverEffect()
+    }
 }
