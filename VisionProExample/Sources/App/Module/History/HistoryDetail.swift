@@ -77,7 +77,7 @@ struct HistoryDetail: View {
                 .foregroundColor(.black)
    
             Spacer()
-                .frame(height: 30)
+                .frame(height: 24)
         }
         .padding(24)
     }

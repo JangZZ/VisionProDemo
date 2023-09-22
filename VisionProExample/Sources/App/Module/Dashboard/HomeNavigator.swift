@@ -95,6 +95,9 @@ final class HomeNavigator: Navigatorable {
                 QRView()
             case .historyDetail(let history):
                 HistoryDetail(history: history)
+                
+            case .accountAndCard:
+                AccountAndCardView()
             default:
                 Text("Detail")
             }

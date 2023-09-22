@@ -54,11 +54,15 @@ struct TransactionHistory: Hashable {
     )
 }
 
-struct Account: Hashable {
+struct Account: Hashable, Identifiable {
     let customerName: String
     let balance: Double
     let accountNumber: String
     let bankName: String
+    
+    var id: String {
+        accountNumber
+    }
 }
 
 struct MainView: View {
@@ -195,8 +199,8 @@ struct HomeView: View {
                     .multilineTextAlignment(.leading)
                     .foregroundColor(.black)
                 
-                Text("30,000,611,999")
-                    .font(.body)
+                Text((vm.accounts.first?.balance.toMoneyString() ?? "VND 0"))
+                    .font(.headline)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(.black)
             }
@@ -219,7 +223,7 @@ struct HomeView: View {
         HStack(spacing: 16) {
             buildMainButton(
                 action: {
-                    
+                    navigator.push(to: .accountAndCard)
                 },
                 title: "Accounts & Cards",
                 image: Image(.icAccountCard)
@@ -264,12 +268,13 @@ struct HomeView: View {
             VStack {
                 image
                 Text(title)
+                    .foregroundColor(.primary)
                     .font(.system(size: 12))
             }
             .frame(width: 120, height: 44)
             .padding(16)
         }
-        .buttonStyle(FunFactButtonStyle())
+        .buttonStyle(.funFact)
     }
     
     @ViewBuilder func buildHistoryView(_ history: TransactionHistory) -> some View {
@@ -279,8 +284,11 @@ struct HomeView: View {
             
             VStack(alignment: .leading, spacing: 10) {
                 Text(history.toAccount.customerName)
+                    .foregroundColor(.primary)
                     .multilineTextAlignment(.leading)
+                
                 Text(history.message)
+                    .foregroundColor(.secondary)
                     .multilineTextAlignment(.leading)
             }
             
@@ -288,7 +296,7 @@ struct HomeView: View {
         
             Text(history.balance.toMoneyString(isHiddenCurrent: true))
                 .font(.body)
-                .foregroundColor(.black)
+                .foregroundColor(.primary)
                 .frame(maxWidth: .infinity)
                 .fixedSize(horizontal: true, vertical: true)
                 .multilineTextAlignment(.trailing)
@@ -349,5 +357,11 @@ struct FunFactButtonStyle: ButtonStyle {
         configuration.label
             .background(.regularMaterial, in: .rect(cornerRadius: 12))
             .hoverEffect()
+    }
+}
+
+extension ButtonStyle where Self == FunFactButtonStyle {
+    static var funFact: Self {
+        FunFactButtonStyle()
     }
 }

@@ -16,6 +16,8 @@
 		A1A3300A2AB99C9400F88724 /* Double+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A330092AB99C9400F88724 /* Double+Ext.swift */; };
 		A1A3300C2ABA9E8500F88724 /* HistoryDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A3300B2ABA9E8500F88724 /* HistoryDetail.swift */; };
 		A1A3300E2ABAA15000F88724 /* HomeNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A3300D2ABAA15000F88724 /* HomeNavigator.swift */; };
+		A1A330112ABD364D00F88724 /* AccountAndCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A330102ABD364D00F88724 /* AccountAndCardView.swift */; };
+		A1A330132ABD3A1F00F88724 /* AccountCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A330122ABD3A1F00F88724 /* AccountCardViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		A1A330092AB99C9400F88724 /* Double+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
 		A1A3300B2ABA9E8500F88724 /* HistoryDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetail.swift; sourceTree = "<group>"; };
 		A1A3300D2ABAA15000F88724 /* HomeNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigator.swift; sourceTree = "<group>"; };
+		A1A330102ABD364D00F88724 /* AccountAndCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAndCardView.swift; sourceTree = "<group>"; };
+		A1A330122ABD3A1F00F88724 /* AccountCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCardViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +127,7 @@
 		A1A330002AB89B6A00F88724 /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				A1A3300F2ABD362E00F88724 /* AccountCard */,
 				A1A330012AB89B7000F88724 /* Dashboard */,
 				A1A330022AB89B7900F88724 /* History */,
 				A1A330032AB89B8500F88724 /* QR */,
@@ -162,6 +167,15 @@
 				A1A330092AB99C9400F88724 /* Double+Ext.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		A1A3300F2ABD362E00F88724 /* AccountCard */ = {
+			isa = PBXGroup;
+			children = (
+				A1A330102ABD364D00F88724 /* AccountAndCardView.swift */,
+				A1A330122ABD3A1F00F88724 /* AccountCardViewModel.swift */,
+			);
+			path = AccountCard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,12 +250,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1A330112ABD364D00F88724 /* AccountAndCardView.swift in Sources */,
 				A1A32FEF2AB899A900F88724 /* HomeView.swift in Sources */,
 				A1A330052AB8AA6400F88724 /* QRView.swift in Sources */,
 				A1A32FED2AB899A900F88724 /* VisionProExampleApp.swift in Sources */,
 				A1A330072AB9933600F88724 /* HomeViewModel.swift in Sources */,
 				A1A3300E2ABAA15000F88724 /* HomeNavigator.swift in Sources */,
 				A1A3300A2AB99C9400F88724 /* Double+Ext.swift in Sources */,
+				A1A330132ABD3A1F00F88724 /* AccountCardViewModel.swift in Sources */,
 				A1A3300C2ABA9E8500F88724 /* HistoryDetail.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
