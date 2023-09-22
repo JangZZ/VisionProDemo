@@ -65,18 +65,12 @@ extension Navigatorable {
     func present(sheet: SheetType) {
         sheetStack.append(sheet)
 
-        if sheetStack.count == 1 {
-            currentSheet = sheet
-        }
+        currentSheet = sheet
     }
 
     @MainActor
     func sheetDismissed() {
-        sheetStack.removeFirst()
-
-        if let nextSheet = sheetStack.first {
-            currentSheet = nextSheet
-        }
+        currentSheet = nil
     }
 }
 
@@ -99,9 +93,9 @@ final class HomeNavigator: Navigatorable {
             switch self {
             case .qrTransfer:
                 QRView()
-            case .historyDetail(_):
-                HistoryDetail()
-            default: 
+            case .historyDetail(let history):
+                HistoryDetail(history: history)
+            default:
                 Text("Detail")
             }
         }
@@ -114,8 +108,8 @@ final class HomeNavigator: Navigatorable {
         
         @ViewBuilder var body: some View {
             switch self {
-            case .historyDetail:
-                HistoryDetail()
+            case .historyDetail(let history):
+                HistoryDetail(history: history)
             }
         }
     }

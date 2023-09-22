@@ -8,8 +8,23 @@
 import Foundation
 
 extension Double {
-    func convertToMoneyString() -> String {
-        return formatLargeMoney(numberOfFraction: 1)
+    func toMoneyString(isHiddenCurrent: Bool = false) -> String {
+        let currencyFormatter = NumberFormatter()
+        currencyFormatter.numberStyle = .currencyISOCode
+        currencyFormatter.paddingPosition = .afterPrefix
+        currencyFormatter.currencyCode = "VND"
+        // localize to your grouping and decimal separator
+        currencyFormatter.locale = Locale(identifier: "en_US")
+
+        // We'll force unwrap with the !, if you've got defined data you may need more error checking
+
+        let money = currencyFormatter.string(from: NSNumber(value: self))!
+        
+        if isHiddenCurrent {
+            return money.replacingOccurrences(of: "VND", with: "")
+        } else {
+            return money
+        }
     }
     
     func formatLargeMoney(

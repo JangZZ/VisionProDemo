@@ -32,6 +32,26 @@ struct TransactionHistory: Hashable {
     let message: String
     let fromAccount: Account
     let toAccount: Account
+    
+    static let mock: Self = .init(
+        transactionID: "FT34343530034350BNK",
+        createdTime: "10:20 17/09/2023",
+        balance: -9000000,
+        providerName: "",
+        message: "NGUYEN VAN A chuyen tien",
+        fromAccount: .init(
+            customerName: "NGUYEN VAN A",
+            balance: 30000000,
+            accountNumber: "88888888",
+            bankName: "Techcombank"
+        ),
+        toAccount: .init(
+            customerName: "NGUYEN VAN B",
+            balance: 4000000000,
+            accountNumber: "666666666",
+            bankName: "Vietcombank"
+        )
+    )
 }
 
 struct Account: Hashable {
@@ -107,7 +127,7 @@ struct HomeView: View {
     @Environment(\.openWindow) var openWindow
     @EnvironmentObject var navigator: HomeNavigator
     @Binding var columnVisibility: NavigationSplitViewVisibility
-    var vm = HomeViewModel()
+    @State var vm = HomeViewModel()
     
     var body: some View {
         NavigationStack(path: $navigator.path) {
@@ -171,12 +191,12 @@ struct HomeView: View {
             
             VStack(alignment: .leading, spacing: 5) {
                 Text("Current Balance")
-                    .font(.subheadline)
+                    .font(.callout)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(.black)
                 
                 Text("30,000,611,999")
-                    .font(.callout)
+                    .font(.body)
                     .multilineTextAlignment(.leading)
                     .foregroundColor(.black)
             }
@@ -196,7 +216,7 @@ struct HomeView: View {
     }
     
     @ViewBuilder var actionsButton: some View {
-        HStack(spacing: 20) {
+        HStack(spacing: 16) {
             buildMainButton(
                 action: {
                     
@@ -229,8 +249,7 @@ struct HomeView: View {
                 image: Image(.icCardless)
             )
         }
-        .padding(.vertical, 16)
-        .padding(.horizontal, 20)
+        .padding(12)
         .glassBackgroundEffect(in: .rect(cornerRadius: 12))
     }
     
@@ -267,7 +286,7 @@ struct HomeView: View {
             
             Spacer()
         
-            Text(history.balance.convertToMoneyString())
+            Text(history.balance.toMoneyString(isHiddenCurrent: true))
                 .font(.body)
                 .foregroundColor(.black)
                 .frame(maxWidth: .infinity)
