@@ -106,6 +106,7 @@ final class HomeNavigator: Navigatorable {
     
     enum Sheet: SheetEnum {
         case historyDetail(TransactionHistory)
+        case moveMoney
         
         var id: String { UUID().uuidString }
         
@@ -113,6 +114,9 @@ final class HomeNavigator: Navigatorable {
             switch self {
             case .historyDetail(let history):
                 HistoryDetail(history: history)
+                
+            case .moveMoney:
+                MoveMoneySheet()
             }
         }
     }

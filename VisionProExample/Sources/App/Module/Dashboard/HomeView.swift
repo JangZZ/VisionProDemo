@@ -253,7 +253,7 @@ struct HomeView: View {
             
             buildMainButton(
                 action: {
-                    
+                    navigator.present(sheet: .moveMoney)
                 },
                 title: "Move Money",
                 image: Image(.icMoveMoney)
