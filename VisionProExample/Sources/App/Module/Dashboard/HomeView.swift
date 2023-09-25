@@ -124,18 +124,24 @@ struct MainView: View {
                     .environmentObject(homeNavigator)
             default:
                 VStack(alignment: .leading) {
-                    Button {
-                        columnVisibility = .doubleColumn
-                    } label: {
-                        Image(systemName: "circle.grid.3x3.circle.fill")
-                            .resizable()
-                            .frame(width: 40, height: 40)
+                    if columnVisibility == .detailOnly {
+                        Button {
+                            columnVisibility = .doubleColumn
+                        } label: {
+                            Image(systemName: "circle.grid.3x3.circle.fill")
+                                .resizable()
+                                .frame(width: 40, height: 40)
+                        }
+                        .buttonStyle(.plain)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(30)
+                        .hoverEffect()
+                    } else {
+                        Spacer()
+                            .frame(height: 40)
+                            .padding(30)
                     }
-                    .buttonStyle(.plain)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(30)
-                    .hoverEffect()
-                    
+
                     Text("Detail")
                         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
                     

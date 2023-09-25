@@ -40,8 +40,8 @@ struct MoveMoneySheet: View {
                 
                 VStack(spacing: 8) {
                     Text("To someone else")
-                        .font(.body)
-                        .foregroundColor(.primary)
+                        .font(.headline)
+                        .foregroundColor(.black)
                         .multilineTextAlignment(.leading)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
@@ -65,8 +65,8 @@ struct MoveMoneySheet: View {
                     .cornerRadius(19)
                 
                 Text("Between my TCB accounts")
-                    .font(.body)
-                    .foregroundColor(.primary)
+                    .font(.headline)
+                    .foregroundColor(.black)
                     .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
@@ -90,8 +90,8 @@ struct MoveMoneySheet: View {
                 
                 VStack(spacing: 8) {
                     Text("Bills and Top-up")
-                        .font(.body)
-                        .foregroundColor(.primary)
+                        .font(.headline)
+                        .foregroundColor(.black)
                         .multilineTextAlignment(.leading)
                         .frame(maxWidth: .infinity, alignment: .leading)
                     
