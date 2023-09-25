@@ -16,38 +16,36 @@ struct QRView: View {
     
     
     var body: some View {
-        NavigationStack {
-            VStack {
-                PhotosPicker(
-                    selection: $selectedItem,
-                    matching: .images,
-                    photoLibrary: .shared()) {
-                        Text("Select a photo")
-                            .frame(width: 300, height: 80)
-                            .font(.system(size: 30, weight: .bold))
-                    }
-                    .onChange(of: selectedItem, { oldValue, newValue in
-                        Task {
-                            // Retrieve selected asset in the form of Data
-                            if let data = try? await newValue?.loadTransferable(type: Data.self) {
-                                selectedImageData = data
-                            }
+        VStack {
+            PhotosPicker(
+                selection: $selectedItem,
+                matching: .images,
+                photoLibrary: .shared()) {
+                    Text("Select a photo")
+                        .frame(width: 300, height: 80)
+                        .font(.system(size: 30, weight: .bold))
+                }
+                .onChange(of: selectedItem, { oldValue, newValue in
+                    Task {
+                        // Retrieve selected asset in the form of Data
+                        if let data = try? await newValue?.loadTransferable(type: Data.self) {
+                            selectedImageData = data
                         }
-                    })
-                    .padding(.top, 25)
-                    .padding(.bottom, 25)
-                HStack(alignment: .top, content: {
-                    if let selectedImageData,
-                       let uiImage = UIImage(data: selectedImageData) {
-                        Image(uiImage: uiImage)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 300, height: 400)
-                        infoView
                     }
                 })
-                .padding(.all, 24)
-            }
+                .padding(.top, 25)
+                .padding(.bottom, 25)
+            HStack(alignment: .top, content: {
+                if let selectedImageData,
+                   let uiImage = UIImage(data: selectedImageData) {
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 300, height: 400)
+                    infoView
+                }
+            })
+            .padding(.all, 24)
         }
     }
     

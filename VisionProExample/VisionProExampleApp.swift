@@ -13,9 +13,5 @@ struct VisionProExampleApp: App {
         WindowGroup {
             MainView()
         }
-        
-        WindowGroup(id: "QRWindow") {
-            QRView()
-        }
     }
 }

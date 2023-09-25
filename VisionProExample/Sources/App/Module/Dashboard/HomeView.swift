@@ -153,7 +153,6 @@ struct MainView: View {
 struct HomeView: View {
     
     // MARK: - Properties
-    @Environment(\.openWindow) var openWindow
     @EnvironmentObject var navigator: HomeNavigator
     @Binding var columnVisibility: NavigationSplitViewVisibility
     @State var vm = HomeViewModel()
@@ -262,7 +261,7 @@ struct HomeView: View {
             
             buildMainButton(
                 action: {
-                    openWindow(id: "QRWindow")
+                    navigator.push(to: .qrTransfer)
                 },
                 title: "Scan QR",
                 image: Image(.icQr)
