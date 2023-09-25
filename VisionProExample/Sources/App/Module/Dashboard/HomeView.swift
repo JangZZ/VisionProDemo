@@ -117,10 +117,35 @@ struct MainView: View {
     }
     
     @ViewBuilder var detailContent: some View {
-        switch itemSelected {
-        case .home: HomeView(columnVisibility: $columnVisibility)
-                .environmentObject(homeNavigator)
-        default: QRView()
+        NavigationStack(path: $homeNavigator.path) {
+            switch itemSelected {
+            case .home:
+                HomeView(columnVisibility: $columnVisibility)
+                    .environmentObject(homeNavigator)
+            default:
+                VStack(alignment: .leading) {
+                    Button {
+                        columnVisibility = .doubleColumn
+                    } label: {
+                        Image(systemName: "circle.grid.3x3.circle.fill")
+                            .resizable()
+                            .frame(width: 40, height: 40)
+                    }
+                    .buttonStyle(.plain)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(30)
+                    .hoverEffect()
+                    
+                    Text("Detail")
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                    
+                    Spacer()
+                }
+                .navigationBarHidden(true)
+            }
+        }
+        .onChange(of: itemSelected) {
+            homeNavigator.popToRoot()
         }
     }
 }
@@ -134,50 +159,48 @@ struct HomeView: View {
     @State var vm = HomeViewModel()
     
     var body: some View {
-        NavigationStack(path: $navigator.path) {
-            VStack(alignment: .trailing) {
-                if columnVisibility == .detailOnly {
-                    Button {
-                        columnVisibility = .doubleColumn
-                    } label: {
-                        Image(systemName: "circle.grid.3x3.circle.fill")
-                            .resizable()
-                            .frame(width: 40, height: 40)
-                    }
-                    .buttonStyle(.plain)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal, 30)
-                    .hoverEffect()
-                } else {
-                    Spacer()
-                        .frame(height: 40)
+        VStack(alignment: .trailing) {
+            if columnVisibility == .detailOnly {
+                Button {
+                    columnVisibility = .doubleColumn
+                } label: {
+                    Image(systemName: "circle.grid.3x3.circle.fill")
+                        .resizable()
+                        .frame(width: 40, height: 40)
                 }
-                
-                Image(.icLogoTech)
-                    .resizable()
-                    .frame(width: 360, height: 48)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal, 30)
-                    .padding(.top, 30)
-                    .padding(.bottom, 20)
-                
-                currentBalance
-                
-                HStack(spacing: 30) {
-                    historyView
-                    
-                    chartMoneyTracker
-                }
-                .padding(.top, 16)
-                
+                .buttonStyle(.plain)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 30)
+                .hoverEffect()
+            } else {
                 Spacer()
+                    .frame(height: 40)
             }
-            .frame(maxWidth: .infinity)
-            .padding(.bottom, 16)
-            .padding(.top, 30)
-            .navigationBarHidden(true)
-            .navigate(by: navigator)
+            
+            Image(.icLogoTech)
+                .resizable()
+                .frame(width: 360, height: 48)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.horizontal, 30)
+                .padding(.top, 30)
+                .padding(.bottom, 20)
+            
+            currentBalance
+            
+            HStack(spacing: 30) {
+                historyView
+                
+                chartMoneyTracker
+            }
+            .padding(.top, 16)
+            
+            Spacer()
         }
+        .frame(maxWidth: .infinity)
+        .padding(.bottom, 16)
+        .padding(.top, 30)
+        .navigationBarHidden(true)
+        .navigate(by: navigator)
         .onAppear {
             vm.fetchHistory()
         }
