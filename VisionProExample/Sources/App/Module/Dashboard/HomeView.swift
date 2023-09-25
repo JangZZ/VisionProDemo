@@ -269,7 +269,7 @@ struct HomeView: View {
 
             buildMainButton(
                 action: {
-                    
+                    navigator.push(to: .cardless)
                 },
                 title: "Cardless withdraw",
                 image: Image(.icCardless)

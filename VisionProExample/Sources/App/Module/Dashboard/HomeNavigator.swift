@@ -93,11 +93,15 @@ final class HomeNavigator: Navigatorable {
             switch self {
             case .qrTransfer:
                 QRView()
+                
             case .historyDetail(let history):
                 HistoryDetail(history: history)
                 
             case .accountAndCard:
                 AccountAndCardView()
+                
+            case .cardless:
+                CardLessView()
             default:
                 Text("Detail")
             }

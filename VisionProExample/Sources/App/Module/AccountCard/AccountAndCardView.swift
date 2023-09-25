@@ -22,6 +22,11 @@ struct AccountAndCardView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
+            Image(.icLogoRed)
+                .resizable()
+                .frame(width: 250, height: 40, alignment: .leading)
+                .frame(maxWidth: .infinity,  alignment: .leading)
+            
             VStack(alignment: .leading) {
                 Text("You own")
                     .font(.body)
@@ -38,6 +43,7 @@ struct AccountAndCardView: View {
             .padding(16)
             .background(.black.opacity(0.1))
             .cornerRadius(18)
+            .padding(.top, 10)
             
             Picker("Account type", selection: $accountIndexSelected) {
                 ForEach(AccountType.allCases, id: \.self) { type in

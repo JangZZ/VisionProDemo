@@ -76,48 +76,52 @@ struct QRView: View {
                     .keyboardType(.numberPad)
             }
             .padding(.bottom, 24)
-            accountView
-                .onTapGesture {
-                    NavigationView {
-                        VStack {
-                            Text("Hello World")
-                            NavigationLink(destination: AccountListView()) {
-                                Text("Do Something")
-                            }
-                        }
-                    }
-                }
+            AccountView()
         }
         
     }
+}
+
+struct AccountView: View {
     
-    @ViewBuilder var accountView: some View {
+    var body: some View {
         VStack(alignment: .trailing, content: {
-            HStack(alignment: .top, content: {
+            HStack(alignment: .top, spacing: 16) {
                 Image(.icAccountCard)
-                    .padding(.trailing, 16)
+                
                 VStack {
                     Text("Tài khoản thanh toán")
                         .font(.system(size: 25, weight: .bold))
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.bottom, 8)
+                        .padding(.bottom, 3)
                     Text("686868686868")
                         .font(.system(size: 25))
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
-            })
-            .padding(.all, 16)
+            }
+            .padding(.horizontal, 24)
+            .padding(.vertical, 16)
+            
             Divider()
+            
             Text("VND 80000000000")
                 .font(.system(size: 25, weight: .bold))
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .padding(.all, 16)
                 .multilineTextAlignment(.trailing)
         })
-        .overlay(
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(.white)
-        )
+        .background(.black.opacity(0.2))
+        .cornerRadius(16)
+        .onTapGesture {
+            NavigationView {
+                VStack {
+                    Text("Hello World")
+                    NavigationLink(destination: AccountListView()) {
+                        Text("Do Something")
+                    }
+                }
+            }
+        }
     }
 }
 
