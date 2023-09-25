@@ -23,10 +23,12 @@ struct MoveMoneySheet: View {
             }
             .buttonStyle(.plain)
             .frame(maxWidth: .infinity, alignment: .trailing)
+            .padding(.horizontal, 8)
             
             Text("TRANSFER")
                 .font(.headline)
                 .foregroundColor(.secondary)
+                .padding(.horizontal, 8)
             
             HStack(spacing: 12) {
                 Image(.icShortcutTransferOthers)
@@ -50,8 +52,10 @@ struct MoveMoneySheet: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
-            .padding(.top, 8)
-            
+            .padding(8)
+            .contentShape(.hoverEffect, .rect(cornerRadius: 8))
+            .hoverEffect()
+                    
             HStack(spacing: 12) {
                 Image(.icShortcutTransferBetween)
                     .resizable()
@@ -66,11 +70,15 @@ struct MoveMoneySheet: View {
                     .multilineTextAlignment(.leading)
                     .frame(maxWidth: .infinity, alignment: .leading)
             }
+            .padding(8)
+            .contentShape(.hoverEffect, .rect(cornerRadius: 8))
+            .hoverEffect()
             
             Text("PAYMENT")
                 .font(.headline)
                 .foregroundColor(.secondary)
                 .padding(.top, 16)
+                .padding(.horizontal, 8)
             
             HStack(spacing: 12) {
                 Image(.icToBill)
@@ -94,9 +102,12 @@ struct MoveMoneySheet: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                 }
             }
-            .padding(.top, 8)
+            .padding(8)
+            .contentShape(.hoverEffect, .rect(cornerRadius: 8))
+            .hoverEffect()
         }
-        .padding(24)
+        .padding(.vertical, 24)
+        .padding(.horizontal, 10)
     }
 }
 
