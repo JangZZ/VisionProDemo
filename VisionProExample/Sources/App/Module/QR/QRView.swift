@@ -14,7 +14,7 @@ struct QRView: View {
     @State private var amount: String = ""
     @State private var description: String = ""
     @State private var showingAccountList = false
-    @EnvironmentObject var navigator: HomeNavigator
+    @EnvironmentObject var navigator: AppNavigator
 
     var body: some View {
         VStack {
@@ -145,7 +145,7 @@ struct AccountView: View {
 }
 
 struct AccountListView: View {
-    @EnvironmentObject var navigator: HomeNavigator
+    @EnvironmentObject var navigator: AppNavigator
 
     var body: some View {
         VStack(alignment: .trailing, spacing: 16, content: {

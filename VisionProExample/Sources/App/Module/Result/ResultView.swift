@@ -10,7 +10,7 @@ import SwiftUI
 struct ResultView: View {
     @State var message: String = ""
     @State var amount: String = ""
-    @EnvironmentObject var navigator: HomeNavigator
+    @EnvironmentObject var navigator: AppNavigator
 
     var body: some View {
         VStack(alignment: .leading) {

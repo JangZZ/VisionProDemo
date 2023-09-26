@@ -10,7 +10,7 @@ import SwiftUI
 struct ConfirmView: View {
     @State var message: String = ""
     @State var amount: String = ""
-    @EnvironmentObject var navigator: HomeNavigator
+    @EnvironmentObject var navigator: AppNavigator
 
     var body: some View {
         VStack(alignment: .center, spacing: 8) {
