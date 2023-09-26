@@ -46,6 +46,7 @@ extension Navigatorable {
     
     @MainActor
     func popToRoot() {
+        currentSheet = nil
         path = []
     }
     
