@@ -15,7 +15,7 @@
 		A1A330072AB9933600F88724 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A330062AB9933600F88724 /* HomeViewModel.swift */; };
 		A1A3300A2AB99C9400F88724 /* Double+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A330092AB99C9400F88724 /* Double+Ext.swift */; };
 		A1A3300C2ABA9E8500F88724 /* HistoryDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A3300B2ABA9E8500F88724 /* HistoryDetail.swift */; };
-		A1A3300E2ABAA15000F88724 /* HomeNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A3300D2ABAA15000F88724 /* HomeNavigator.swift */; };
+		A1A3300E2ABAA15000F88724 /* AppNavigator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A3300D2ABAA15000F88724 /* AppNavigator.swift */; };
 		A1A330112ABD364D00F88724 /* AccountAndCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A330102ABD364D00F88724 /* AccountAndCardView.swift */; };
 		A1A330132ABD3A1F00F88724 /* AccountCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A330122ABD3A1F00F88724 /* AccountCardViewModel.swift */; };
 		A1A330162AC12F4200F88724 /* MoveMoneySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1A330152AC12F4200F88724 /* MoveMoneySheet.swift */; };
@@ -33,7 +33,7 @@
 		A1A330062AB9933600F88724 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		A1A330092AB99C9400F88724 /* Double+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
 		A1A3300B2ABA9E8500F88724 /* HistoryDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryDetail.swift; sourceTree = "<group>"; };
-		A1A3300D2ABAA15000F88724 /* HomeNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeNavigator.swift; sourceTree = "<group>"; };
+		A1A3300D2ABAA15000F88724 /* AppNavigator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppNavigator.swift; sourceTree = "<group>"; };
 		A1A330102ABD364D00F88724 /* AccountAndCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountAndCardView.swift; sourceTree = "<group>"; };
 		A1A330122ABD3A1F00F88724 /* AccountCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountCardViewModel.swift; sourceTree = "<group>"; };
 		A1A330152AC12F4200F88724 /* MoveMoneySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoveMoneySheet.swift; sourceTree = "<group>"; };
@@ -146,7 +146,7 @@
 			children = (
 				A1A32FEE2AB899A900F88724 /* HomeView.swift */,
 				A1A330062AB9933600F88724 /* HomeViewModel.swift */,
-				A1A3300D2ABAA15000F88724 /* HomeNavigator.swift */,
+				A1A3300D2ABAA15000F88724 /* AppNavigator.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -279,7 +279,7 @@
 				A1A32FED2AB899A900F88724 /* VisionProExampleApp.swift in Sources */,
 				A1A330072AB9933600F88724 /* HomeViewModel.swift in Sources */,
 				A1A330162AC12F4200F88724 /* MoveMoneySheet.swift in Sources */,
-				A1A3300E2ABAA15000F88724 /* HomeNavigator.swift in Sources */,
+				A1A3300E2ABAA15000F88724 /* AppNavigator.swift in Sources */,
 				A1A3300A2AB99C9400F88724 /* Double+Ext.swift in Sources */,
 				A1A330132ABD3A1F00F88724 /* AccountCardViewModel.swift in Sources */,
 				A1A3300C2ABA9E8500F88724 /* HistoryDetail.swift in Sources */,

@@ -70,7 +70,7 @@ struct MainView: View {
     // MARK: - Properties
     @State private var itemSelected: SideMenuItem = .home
     @State private var columnVisibility: NavigationSplitViewVisibility = .detailOnly
-    @StateObject private var homeNavigator = HomeNavigator()
+    @StateObject private var homeNavigator = AppNavigator()
     
     var body: some View {
         NavigationSplitView(columnVisibility: $columnVisibility) {
@@ -121,6 +121,7 @@ struct MainView: View {
             switch itemSelected {
             case .home:
                 HomeView(columnVisibility: $columnVisibility)
+                    .navigate(by: homeNavigator)
                     .environmentObject(homeNavigator)
             default:
                 VStack(alignment: .leading) {
@@ -159,7 +160,7 @@ struct MainView: View {
 struct HomeView: View {
     
     // MARK: - Properties
-    @EnvironmentObject var navigator: HomeNavigator
+    @EnvironmentObject var navigator: AppNavigator
     @Binding var columnVisibility: NavigationSplitViewVisibility
     @State var vm = HomeViewModel()
     
@@ -205,7 +206,6 @@ struct HomeView: View {
         .padding(.bottom, 16)
         .padding(.top, 30)
         .navigationBarHidden(true)
-        .navigate(by: navigator)
         .onAppear {
             vm.fetchHistory()
         }
