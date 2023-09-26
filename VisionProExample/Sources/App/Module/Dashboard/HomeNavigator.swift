@@ -88,6 +88,8 @@ final class HomeNavigator: Navigatorable {
         case accountAndCard
         case cardless
         case historyDetail(TransactionHistory)
+        case preview(String, String)
+        case result(String, String)
         
         @ViewBuilder var body: some View {
             switch self {
@@ -102,6 +104,13 @@ final class HomeNavigator: Navigatorable {
                 
             case .cardless:
                 CardLessView()
+            
+            case .preview(let message, let amount):
+                ConfirmView(message: message, amount: amount)
+                
+            case .result(let message, let amount):
+                ResultView(message: message, amount: amount)
+    
             default:
                 Text("Detail")
             }
@@ -111,6 +120,9 @@ final class HomeNavigator: Navigatorable {
     enum Sheet: SheetEnum {
         case historyDetail(TransactionHistory)
         case moveMoney
+        case accountList
+        case preview
+        case result(String, String)
         
         var id: String { UUID().uuidString }
         
@@ -120,6 +132,15 @@ final class HomeNavigator: Navigatorable {
                 HistoryDetail(history: history)
                 
             case .moveMoney:
+                MoveMoneySheet()
+                
+            case .accountList:
+                AccountListView()
+            
+            case .result(let message, let amount):
+                ResultView(message: message, amount: amount)
+                
+            case .preview:
                 MoveMoneySheet()
             }
         }
@@ -145,10 +166,12 @@ struct NavigatorModifer<N: Navigatorable>: ViewModifier {
         content
             .navigationDestination(for: N.Router.self) { router in
                 router.body
+                    .environmentObject(navigator)
             }
             // for sheet
             .sheet(item: $navigator.currentSheet) { sheet in
                 sheet.body
+                    .environmentObject(navigator)
             }
     }
 }

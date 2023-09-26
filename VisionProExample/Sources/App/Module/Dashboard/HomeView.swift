@@ -121,7 +121,7 @@ struct MainView: View {
             switch itemSelected {
             case .home:
                 HomeView(columnVisibility: $columnVisibility)
-                    .environmentObject(homeNavigator)
+    
             default:
                 VStack(alignment: .leading) {
                     if columnVisibility == .detailOnly {
@@ -153,6 +153,7 @@ struct MainView: View {
         .onChange(of: itemSelected) {
             homeNavigator.popToRoot()
         }
+        .environmentObject(homeNavigator)
     }
 }
 

@@ -40,7 +40,8 @@ struct CardLessView: View {
             
             Spacer()
             
-            AccountView()
+            AccountView(onTap: {
+            })
                 .padding(.top, 20)
         }
         .padding(.top, 16)

@@ -11,10 +11,11 @@ import PhotosUI
 struct QRView: View {
     @State private var selectedItem: PhotosPickerItem? = nil
     @State private var selectedImageData: Data? = nil
-    @State private var amount: String = "500000000"
+    @State private var amount: String = ""
+    @State private var description: String = ""
     @State private var showingAccountList = false
-    
-    
+    @EnvironmentObject var navigator: HomeNavigator
+
     var body: some View {
         VStack {
             PhotosPicker(
@@ -42,10 +43,12 @@ struct QRView: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 300, height: 400)
-                    infoView
                 }
+                infoView
+               
             })
             .padding(.all, 24)
+            
         }
     }
     
@@ -75,8 +78,26 @@ struct QRView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .keyboardType(.numberPad)
             }
+            HStack {
+                Text("Nội dung: ")
+                    .font(.system(size: 25, weight: .bold))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                TextField("Nội dung",text: $description)
+                    .font(.largeTitle)
+                    .foregroundStyle(.blue)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .keyboardType(.default)
+                    .submitLabel(.done)
+                    .onSubmit {
+                        navigator.push(to: .preview(description,
+                                                    amount))
+                    }
+
+            }
             .padding(.bottom, 24)
-            AccountView()
+            AccountView(onTap: {
+                navigator.present(sheet: .accountList)
+            })
         }
         
     }
@@ -84,11 +105,12 @@ struct QRView: View {
 
 struct AccountView: View {
     
+    var onTap: () -> ()
+
     var body: some View {
         VStack(alignment: .trailing, content: {
             HStack(alignment: .top, spacing: 16) {
                 Image(.icAccountCard)
-                
                 VStack {
                     Text("Tài khoản thanh toán")
                         .font(.system(size: 25, weight: .bold))
@@ -113,14 +135,7 @@ struct AccountView: View {
         .background(.black.opacity(0.2))
         .cornerRadius(16)
         .onTapGesture {
-            NavigationView {
-                VStack {
-                    Text("Hello World")
-                    NavigationLink(destination: AccountListView()) {
-                        Text("Do Something")
-                    }
-                }
-            }
+            onTap()
         }
     }
 }
@@ -130,32 +145,33 @@ struct AccountView: View {
 }
 
 struct AccountListView: View {
+    @EnvironmentObject var navigator: HomeNavigator
+
     var body: some View {
-        VStack(alignment: .trailing, content: {
-            HStack(alignment: .top, content: {
-                Image(.icAccountCard)
-                    .padding(.trailing, 16)
-                VStack {
-                    Text("Tài khoản thanh toán")
-                        .font(.system(size: 25, weight: .bold))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.bottom, 8)
-                    Text("686868686868")
-                        .font(.system(size: 25))
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                }
+        VStack(alignment: .trailing, spacing: 16, content: {
+            Button {
+                navigator.sheetDismissed()
+            } label: {
+                Image(systemName: "xmark.circle.fill")
+                    .resizable()
+                    .frame(width: 30, height: 30)
+            }
+            .buttonStyle(.plain)
+            .frame(maxWidth: .infinity, alignment: .trailing)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 16)
+            
+            AccountView(onTap: {
+                navigator.sheetDismissed()
             })
-            .padding(.all, 16)
-            Divider()
-            Text("VND 80000000000")
-                .font(.system(size: 25, weight: .bold))
-                .frame(maxWidth: .infinity, alignment: .trailing)
-                .padding(.all, 16)
-                .multilineTextAlignment(.trailing)
+            AccountView(onTap: {
+                navigator.sheetDismissed()
+            })
+            AccountView(onTap: {
+                navigator.sheetDismissed()
+            })
         })
-        .overlay(
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(.white)
-        )
+        .frame(width: 1000)
+        .padding(.all, 50)
     }
 }
