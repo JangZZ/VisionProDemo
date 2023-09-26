@@ -18,13 +18,22 @@ struct QRView: View {
 
     var body: some View {
         VStack {
+            Image(.icLogoRed)
+                .resizable()
+                .frame(width: 250, height: 40, alignment: .leading)
+                .frame(maxWidth: .infinity,  alignment: .leading)
+            
             PhotosPicker(
                 selection: $selectedItem,
                 matching: .images,
                 photoLibrary: .shared()) {
-                    Text("Select a photo")
-                        .frame(width: 300, height: 80)
-                        .font(.system(size: 30, weight: .bold))
+                    HStack(spacing: 16) {
+                        Image(systemName: "photo.artframe")
+                            .frame(width: 30, height: 30)
+                        
+                        Text("Select a photo")
+                            .font(.headline)
+                    }
                 }
                 .onChange(of: selectedItem, { oldValue, newValue in
                     Task {
@@ -36,20 +45,34 @@ struct QRView: View {
                 })
                 .padding(.top, 25)
                 .padding(.bottom, 25)
-            HStack(alignment: .top, content: {
-                if let selectedImageData,
-                   let uiImage = UIImage(data: selectedImageData) {
+            
+            if let selectedImageData,
+               let uiImage = UIImage(data: selectedImageData) {
+                HStack(alignment: .top, spacing: 30, content: {
                     Image(uiImage: uiImage)
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 300, height: 400)
-                }
-                infoView
-               
-            })
-            .padding(.all, 24)
-            
+                        .frame(width: 200, height: 300)
+                    
+                    infoView
+                })
+                .padding(.all, 24)
+                
+                Spacer()
+            } else {
+                Spacer()
+                
+                Text("Share your QR code")
+                    .font(.headline)
+                    .foregroundColor(.primary)
+                
+                Image(.qrDemo)
+                    .resizable()
+                    .frame(width: 300, height: 300, alignment: .center)
+            }
         }
+        .padding(.top, 50)
+        .padding([.horizontal, .bottom], 30)
     }
     
     @ViewBuilder var infoView: some View {
