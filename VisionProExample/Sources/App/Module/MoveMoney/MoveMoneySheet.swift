@@ -10,7 +10,7 @@ import SwiftUI
 struct MoveMoneySheet: View {
     
     // MARK: - Properties
-    @EnvironmentObject var navigator: HomeNavigator
+    @EnvironmentObject var navigator: AppNavigator
     
     var body: some View {
         VStack(alignment: .leading) {

@@ -80,8 +80,15 @@ protocol SheetEnum: Identifiable {
     @ViewBuilder var body: Body { get }
 }
 
-final class HomeNavigator: Navigatorable {
+final class AppNavigator: Navigatorable {
+    
+    @Published var path: [Router] = []
+    @Published var currentSheet: Sheet?
+    var sheetStack: [Sheet] = []
+}
 
+// Routers
+extension AppNavigator {
     enum Router: Routerable {
         case main
         case qrTransfer
@@ -116,7 +123,10 @@ final class HomeNavigator: Navigatorable {
             }
         }
     }
-    
+}
+
+// Sheets
+extension AppNavigator {
     enum Sheet: SheetEnum {
         case historyDetail(TransactionHistory)
         case moveMoney
@@ -146,9 +156,6 @@ final class HomeNavigator: Navigatorable {
         }
     }
     
-    @Published var path: [Router] = []
-    @Published var currentSheet: Sheet?
-    var sheetStack: [Sheet] = []
 }
 
 extension View {

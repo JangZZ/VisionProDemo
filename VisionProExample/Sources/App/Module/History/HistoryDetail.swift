@@ -11,7 +11,7 @@ struct HistoryDetail: View {
     
     // MARK: - Properties
     var history: TransactionHistory
-    @EnvironmentObject var navigator: HomeNavigator
+    @EnvironmentObject var navigator: AppNavigator
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
