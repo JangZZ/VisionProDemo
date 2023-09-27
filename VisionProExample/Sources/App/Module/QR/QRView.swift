@@ -32,8 +32,23 @@ struct QRView: View {
             
             if let selectedImageData,
                let uiImage = UIImage(data: selectedImageData) {
-                HStack(alignment: .top, spacing: 30, content: {
+                HStack(alignment: .top, spacing: 45, content: {
                     VStack(spacing: 16) {
+                        
+                        HStack(spacing: 16) {
+                            Image(.logoVietqrWhite)
+                                .resizable()
+                                .frame(width: 90, height: 30)
+                            
+                            Image(.logoNapasWhite)
+                                .resizable()
+                                .frame(width: 98, height: 30)
+
+                            Image(.logoVnpayWhite)
+                                .resizable()
+                                .frame(width: 116, height: 30)
+                        }
+                        
                         Image(uiImage: uiImage)
                             .resizable()
                             .scaledToFit()
