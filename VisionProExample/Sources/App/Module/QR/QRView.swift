@@ -23,42 +23,27 @@ struct QRView: View {
                 .frame(width: 250, height: 40, alignment: .leading)
                 .frame(maxWidth: .infinity,  alignment: .leading)
             
-            PhotosPicker(
-                selection: $selectedItem,
-                matching: .images,
-                photoLibrary: .shared()) {
-                    HStack(spacing: 16) {
-                        Image(systemName: "photo.artframe")
-                            .frame(width: 30, height: 30)
-                        
-                        Text("Select a photo")
-                            .font(.headline)
-                    }
-                }
-                .onChange(of: selectedItem, { oldValue, newValue in
-                    Task {
-                        // Retrieve selected asset in the form of Data
-                        if let data = try? await newValue?.loadTransferable(type: Data.self) {
-                            selectedImageData = data
-                        }
-                    }
-                })
-                .padding(.top, 25)
-                .padding(.bottom, 25)
+            if selectedImageData == nil {
+                imagePicker
+                    .padding(.top, 16)
+            }
+            
+            Spacer()
             
             if let selectedImageData,
                let uiImage = UIImage(data: selectedImageData) {
                 HStack(alignment: .top, spacing: 30, content: {
-                    Image(uiImage: uiImage)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 200, height: 300)
+                    VStack(spacing: 16) {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 200, height: 200)
+                        
+                        imagePicker
+                    }
                     
                     infoView
                 })
-                .padding(.all, 24)
-                
-                Spacer()
             } else {
                 Spacer()
                 
@@ -71,7 +56,7 @@ struct QRView: View {
                     .frame(width: 300, height: 300, alignment: .center)
             }
         }
-        .padding(.top, 50)
+        .padding(.top, 16)
         .padding([.horizontal, .bottom], 30)
     }
     
@@ -122,7 +107,31 @@ struct QRView: View {
                 navigator.present(sheet: .accountList)
             })
         }
-        
+    }
+    
+    @ViewBuilder var imagePicker: some View {
+        PhotosPicker(
+            selection: $selectedItem,
+            matching: .images,
+            photoLibrary: .shared()) {
+                HStack(spacing: 16) {
+                    Image(systemName: "photo")
+                        .frame(width: 30, height: 30)
+                        .foregroundColor(.blue)
+                    
+                    Text("Select a photo")
+                        .font(.body)
+                        .foregroundColor(.black)
+                }
+            }
+            .onChange(of: selectedItem, { oldValue, newValue in
+                Task {
+                    // Retrieve selected asset in the form of Data
+                    if let data = try? await newValue?.loadTransferable(type: Data.self) {
+                        selectedImageData = data
+                    }
+                }
+            })
     }
 }
 
